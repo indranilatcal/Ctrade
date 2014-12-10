@@ -1,0 +1,75 @@
+﻿@using CTrade.Client.Web.Areas.Admin.Models
+
+@{
+    ViewBag.Title = "Frequently Asked Questions";
+}
+
+<script>
+    (function ($, formValidation, utils) {
+        formValidation.enableValidaion(
+                '#createForm',
+                {
+                    questionText: 'required',
+                    answerText: 'required'
+                });
+
+        $(document).ready(function () {
+
+            refresh($('#ddlSites').val());
+            $('#ddlSites').change(function () {
+                var item = $(this).val();
+                refresh(item);
+            });
+        });
+        function refresh(selectedItem) {
+            $('#siteId').val(selectedItem);
+            $.get('@(Url.Action("Questions", "FAQ"))', { siteId : selectedItem}, function (data) {
+                $('#partialPlaceHolder').html(data);
+                $('#partialPlaceHolder').show();
+            }).fail(function (data) {
+                utils.showErrors(['Server error: Could not retrieve faqs for the site from server']);
+            });
+        }
+    })(jQuery, formValidation, commonUtils);
+</script>
+<div class="portlet">
+    <div class="portlet-title">
+        <a href="@Url.Action("List", "FAQ")" class="elements"><i></i>View</a>
+    </div>
+    <div class="portlet-body">        
+        <h2><small>Enter an faq and its answer</small></h2>
+        <div class="alert alert-danger display-hide validationSummary"></div>
+        @{Html.RenderAction("List", "Sites");}
+        @using (Html.BeginForm("Create", "FAQ", FormMethod.Post, new { @class = "form-inline", id="createForm" }))
+        {
+            <input type="hidden" name="siteId" id="siteId" />
+            <div class="form-group">
+                <label for="questionText">Question:</label>
+                <textarea required name="questionText" id="questionText" class="form-control" placeholder="Enter question text ..."></textarea>
+            </div>
+            <div class="form-group">
+                <label for="answerText">Answer:</label>
+                <textarea required name="answerText" id="answerText" class="form-control" placeholder="Enter answer text ..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-info"><i class="fa fa-check"></i>Create</button>
+        }
+
+        <hr />
+        @if (!string.IsNullOrWhiteSpace(ViewBag.ErrorMessage))
+        {
+            <div class="alert alert-danger">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Error!</strong> @ViewBag.ErrorMessage.
+            </div>
+        }
+
+        @if (!string.IsNullOrWhiteSpace(ViewBag.SuccessMessage))
+        {
+            <div class="alert alert-success">
+                <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <strong>Success!</strong> @ViewBag.SuccessMessage.
+            </div>
+        }
+        <div id="partialPlaceHolder" style="display:none;"> </div>
+    </div>
+</div>

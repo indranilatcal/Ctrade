@@ -1,0 +1,481 @@
+﻿[
+    {
+        "_id": "1001",
+        "docType": "category",
+        "label" : "Systems",
+        "subCategories" : [
+            {
+                "_id": "100101",
+                "label" : "Desktops & Workstations"
+            },
+            {
+                "_id": "100102",
+                "label" : "Notebooks / Laptops"
+            },
+            {
+                "_id": "100103",
+                "label" : "eBook Readers & Handhelds",
+                "sites" : [
+                    {
+                        "_id": "www.nullskull.com"
+                    }
+                ]
+            },
+            {
+                "_id": "100104",
+                "label" : "Servers",
+                "sites": [
+                        {
+                            "_id": "www.example.com",
+                            "categoryLabelOverride" : "Systems for example.com",
+                            "subCategoryLabelOverride" : "Servers for example.com"
+                        },
+                        {
+                            "_id": "www.myfaq.com",
+                            "categoryLabelOverride" : "Systems for myFaq.com"
+                        }
+                    ]
+            }
+        ]
+    },
+    {
+        "_id": "1005",
+        "docType": "category",
+        "label" : "Networking",
+        "subCategories" : [
+            {
+                "_id": "100501",
+                "label" : "Bridges & Routers",
+                "sites": [
+                        {
+                            "_id": "www.example.com",
+                            "categoryLabelOverride" : "Networking for example.com",
+                            "subCategoryLabelOverride" : "Bridges & Routers for example.com"
+                        }
+                    ]
+            },
+            {
+                "_id": "100502",
+                "label" : "Hubs & Switches"
+            },
+            {
+                "_id": "100503",
+                "label" : "Network Adapters"
+            },
+            {
+                "_id": "100504",
+                "label" : "Modems"
+            },
+            {
+                "_id": "100505",
+                "label" : "Transceivers & Multiplexers"
+            },
+            {
+                "_id": "100506",
+                "label" : "VoIP"
+            },
+            {
+                "_id": "100507",
+                "label" : "Wireless"
+            },
+            {
+                "_id": "100508",
+                "label" : "Network Security"
+            },
+            {
+                "_id": "100509",
+                "label" : "Network Cabling"
+            }
+        ]
+    },
+    {
+        "_id": "2001",
+        "docType": "category",
+        "label" : "Applications",
+        "subCategories" : [
+            {
+                "_id": "200101",
+                "label" : "Antivirus & Security Software"
+            },
+            {
+                "_id": "200102",
+                "label" : "Office Software"
+            },
+            {
+                "_id": "200103",
+                "label" : "Business & Productivity Software"
+            },
+            {
+                "_id": "200104",
+                "label" : "Network Software"
+            },
+            {
+                "_id": "200105",
+                "label" : "Development Tools"
+            },
+            {
+                "_id": "200106",
+                "label" : "Graphics & Publishing Software"
+            },
+            {
+                "_id": "200107",
+                "label" : "Audio & Video"
+            },
+            {
+                "_id": "200108",
+                "label" : "Education & Reference"
+            },
+            {
+                "_id": "200109",
+                "label" : "Home & Hobbies"
+            },
+            {
+                "_id": "200110",
+                "label" : "Software Suites"
+            },
+            {
+                "_id": "200111",
+                "label" : "Utilities"
+            },
+            {
+                "_id": "200112",
+                "label" : "Mac Software"
+            },
+            {
+                "_id": "200113",
+                "label" : "Unix / Linux Software"
+            }
+        ]
+    },
+    {
+        "_id": "2003",
+        "docType": "category",
+        "label" : "Games",
+        "subCategories" : [
+            {
+                "_id": "200301",
+                "label" : "PC Games"
+            },
+            {
+                "_id": "200302",
+                "label" : "Mac Games"
+            },
+            {
+                "_id": "200303",
+                "label" : "Games For Xbox 360"
+            },
+            {
+                "_id": "200304",
+                "label" : "Games For PSP"
+            },
+            {
+                "_id": "200305",
+                "label" : "Games For Playstation 3"
+            },
+            {
+                "_id": "200306",
+                "label" : "Games For Nintendo DS"
+            },
+            {
+                "_id": "200307",
+                "label" : "Games For Nintendo Wii"
+            },
+            {
+                "_id": "200308",
+                "label" : "Legacy Console Games"
+            }
+        ]
+    },
+    {
+        "_id": "1003",
+        "docType": "category",
+        "label" : "Printers & Scanners",
+        "subCategories" : [
+            {
+                "_id": "100301",
+                "label" : "Printers"
+            },
+            {
+                "_id": "100302",
+                "label" : "Scanners"
+            },
+            {
+                "_id": "100303",
+                "label" : "Office Products"
+            },
+            {
+                "_id": "100304",
+                "label" : "Printer Consumables"
+            },
+            {
+                "_id": "100305",
+                "label" : "Print Servers"
+            },
+            {
+                "_id": "100306",
+                "label" : "Printer Accessories"
+            }
+        ]
+    },
+    {
+        "_id": "1004",
+        "docType": "category",
+        "label" : "Storage & Memory",
+        "subCategories" : [
+            {
+                "_id": "100401",
+                "label" : "Hard Drives"
+            },
+            {
+                "_id": "100402",
+                "label" : "Memory Upgrades / RAM"
+            },
+            {
+                "_id": "100403",
+                "label" : "External Storage Enclosures"
+            },
+            {
+                "_id": "100404",
+                "label" : "Flash Memory"
+            },
+            {
+                "_id": "100405",
+                "label" : "Optical Drives"
+            },
+            {
+                "_id": "100406",
+                "label" : "Legacy Drives"
+            },
+            {
+                "_id": "100407",
+                "label" : "Network Storage"
+            },
+            {
+                "_id": "100408",
+                "label" : "Tape Backup"
+            },
+            {
+                "_id": "100409",
+                "label" : "Disc Duplicators"
+            },
+            {
+                "_id": "100410",
+                "label" : "Disk Arrays"
+            },
+            {
+                "_id": "100411",
+                "label" : "Storage Media"
+            },
+            {
+                "_id": "100412",
+                "label" : "Storage Cables"
+            },
+            {
+                "_id": "100413",
+                "label" : "Software"
+            }
+        ]
+    },
+    {
+        "_id": "2002",
+        "docType": "category",
+        "label" : "Operating Systems",
+        "subCategories" : [
+            {
+                "_id": "200201",
+                "label" : "Microsoft Windows"
+            },
+            {
+                "_id": "200202",
+                "label" : "MacOS"
+            },
+            {
+                "_id": "200203",
+                "label" : "Linux / Unix"
+            }
+        ]
+    },
+    {
+        "_id": "1006",
+        "docType": "category",
+        "label" : "Components & Accessories",
+        "subCategories" : [
+            {
+                "_id": "100601",
+                "label" : "KVM"
+            },
+            {
+                "_id": "100602",
+                "label" : "Cables"
+            },
+            {
+                "_id": "100603",
+                "label" : "Processors"
+            },
+            {
+                "_id": "100604",
+                "label" : "Motherboards"
+            },
+            {
+                "_id": "100605",
+                "label" : "System Cases"
+            },
+            {
+                "_id": "100606",
+                "label" : "Controller Cards"
+            },
+            {
+                "_id": "100607",
+                "label" : "Sound Cards"
+            },
+            {
+                "_id": "100608",
+                "label" : "Video Cards"
+            },
+            {
+                "_id": "100609",
+                "label" : "Power Supplies"
+            },
+            {
+                "_id": "100610",
+                "label" : "Fans & Cooling Systems"
+            },
+            {
+                "_id": "100611",
+                "label" : "Keyboards & Mice"
+            },
+            {
+                "_id": "100612",
+                "label" : "Game Controllers"
+            },
+            {
+                "_id": "100613",
+                "label" : "Web & Network Cameras"
+            },
+            {
+                "_id": "100614",
+                "label" : "Power Protection Devices"
+            },
+            {
+                "_id": "100615",
+                "label" : "Batteries"
+            },
+            {
+                "_id": "100616",
+                "label" : "Accessories"
+            },
+            {
+                "_id": "100617",
+                "label" : "Books & Manuals"
+            }
+        ]
+    },
+    {
+        "_id": "3001",
+        "docType": "category",
+        "label" : "Communication",
+        "subCategories" : [
+            {
+                "_id": "300101",
+                "label" : "Cellular Phones"
+            },
+            {
+                "_id": "300102",
+                "label" : "Telephones"
+            },
+            {
+                "_id": "300103",
+                "label" : "Two-Way Radios"
+            }
+        ]
+    },
+    {
+        "_id": "3002",
+        "docType": "category",
+        "label" : "Navigation",
+        "subCategories" : [
+            {
+                "_id": "300201",
+                "label" : "GPS"
+            },
+            {
+                "_id": "300202",
+                "label" : "Marine Electronics"
+            }
+        ]
+    },
+    {
+        "_id": "3003",
+        "docType": "category",
+        "label" : "Audio & Video",
+        "subCategories" : [
+            {
+                "_id": "300301",
+                "label" : "Home Audio"
+            },
+            {
+                "_id": "300302",
+                "label" : "Televisions"
+            },
+            {
+                "_id": "300303",
+                "label" : "Satellite & Cable TV"
+            },
+            {
+                "_id": "300304",
+                "label" : "Portable Audio & Video"
+            },
+            {
+                "_id": "300305",
+                "label" : "Car Audio & Video"
+            },
+            {
+                "_id": "300306",
+                "label" : "Speakers"
+            },
+            {
+                "_id": "300307",
+                "label" : "Video Games & Gadgets"
+            },
+            {
+                "_id": "300308",
+                "label" : "Video Surveillance"
+            },
+            {
+                "_id": "300309",
+                "label" : "Accessories"
+            }
+        ]
+    },
+    {
+        "_id": "3004",
+        "docType": "category",
+        "label" : "Cameras & Camcorders",
+        "subCategories" : [
+            {
+                "_id": "300401",
+                "label" : "Film Cameras"
+            },
+            {
+                "_id": "300402",
+                "label" : "Digital Cameras"
+            },
+            {
+                "_id": "300403",
+                "label" : "Camera Lenses"
+            },
+            {
+                "_id": "300404",
+                "label" : "Camcorders"
+            },
+            {
+                "_id": "300405",
+                "label" : "Camera Accessories"
+            },
+            {
+                "_id": "300406",
+                "label" : "Camcorder Accessories"
+            }
+        ]
+    }
+]

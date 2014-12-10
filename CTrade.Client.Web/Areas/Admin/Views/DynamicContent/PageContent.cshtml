@@ -1,0 +1,46 @@
+﻿<script>
+    (function ($, utils) {
+        $(document).ready(function () {
+            $('#siteId').val('@ViewBag.SiteId');
+            $('#pageId').val('@ViewBag.PageId');
+
+            if (getPageId() && getSite()) {
+                $.get(
+                    '@(Url.Action("Get", "DynamicContent"))',
+                    { siteId: getSite(), pageId: getPageId() }, processResult)
+                    .fail(function (data) {
+                        utils.showError(data.statusText);
+                    });
+            }
+        });
+
+        function processResult(data, status, xhr) {
+            if (status === 'success') {
+                if (data && !data.IsEmpty) {
+                    document.title = data.Title;
+                    $('#pageContent').html(data.Content);
+                    $('#pageContent').show();
+                }
+                else {
+                    utils.showError('Could not find the page requested');
+                    $('#pageContent').hide();
+                }
+            }
+            else
+                utils.showError(status);
+        }
+
+        function getPageId() {
+            return $('#pageId').val();
+        }
+
+        function getSite() {
+            return $('#siteId').val();
+        }
+    })(jQuery, commonUtils);
+</script>
+
+<div class="validationSummary" style="display:none;color:red">Could not find the page requested</div>
+<input type="hidden" name="SiteId" id="siteId" />
+<input type="hidden" name="PageId" id="pageId" />
+<div id="pageContent" style="display:none;"></div>

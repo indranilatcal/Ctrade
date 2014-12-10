@@ -1,0 +1,40 @@
+﻿@using CTrade.Client.Web.Areas.Admin.Models
+@model ManageQuestionsForSiteViewModel
+
+@if (Model.Questions.Any())
+{
+    <script>
+        $(document).ready(function () {
+            $('#questions tr:nth-child(even)').addClass('success');
+        });
+    </script>
+    using (Html.BeginForm("Update", "FAQ"))
+    {
+        <p class="lead">FAQs:</p><button type="submit" class="btn btn-info"><i class="fa fa-check"></i>Save</button>
+        @Html.HiddenFor(m => m.SiteId)
+        <table class="table table-condensed table-hover">
+            <thead>
+                <tr class="alert-info">
+                    <th>Included</th>
+                    <th>Question</th>
+                    <th>Answer</th>
+                </tr>
+            </thead>
+            <tbody id="questions">
+                @for (var i = 0; i < Model.Questions.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.HiddenFor(m => m.Questions[i].SiteId)
+                            @Html.HiddenFor(m => m.Questions[i].QuestionId)
+                            @Html.CheckBoxFor(m => m.Questions[i].IncludedForSite)
+                        </td>
+                        <td>@Model.Questions[i].QuestionText</td>
+                        <td>@Model.Questions[i].AnswerText</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+}
+

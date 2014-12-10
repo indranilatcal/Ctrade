@@ -1,0 +1,665 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="http:/fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    @System.Web.Optimization.Styles.Render(
+    "~/base/Content/Styles/font/css",
+    "~/base/Content/Styles/theme/css",
+    "~/base/Content/Styles/plugins/css")
+    @System.Web.Optimization.Scripts.Render("~/base/bundles/jquery")
+</head>
+<body>
+    <div class="main-wrapper">
+        <!-- Header Parts Start-->
+        <div id="header">
+            <!-- Top Right part Links-->
+            <div id="welcome">
+
+                <div class="links">
+                    My Account
+                    <ul>
+                        <li><a href="http://devlab.countertrade.com/myaccount.aspx">My Account</a></li>
+                        <li><a href="http://devlab.countertrade.com/wishlist.aspx">Wish List</a></li>
+                        <li><a href="http://devlab.countertrade.com/cart.aspx">Shopping Cart</a></li>
+                        <li><a href="http://devlab.countertrade.com/checkout.aspx">Checkout</a></li>
+                    </ul>
+                </div>
+                <a href="http://devlab.countertrade.com/logout.aspx">Logout</a>
+            </div>
+
+            <div id="logo"><a href="http://devlab.countertrade.com/index.html"><img src="/content/images/themes/bigshop/logo.png" title="CounterTrade Ecommerce" alt="CounterTrade Ecommerce"></a></div>
+
+            <div id="search">
+                <div class="button-search"></div>
+                <input type="text" value="" placeholder="" id="filter_name" name="search">
+            </div>
+
+            <!--Mini Cart Start-->
+
+
+         
+            <script>
+    function writeDiv(resDiv,resQty)
+    {
+    	var msg;
+    	msg='<span class="valo-badge size 3x color-blue type-circle">'+resQty+'</span> currently in cart';
+		    if(document.getElementById(resDiv))
+	        {
+	        	document.getElementById(resDiv).innerHTML=msg;
+	        	document.getElementById(resDiv).style.display="block";
+
+	        }
+    }
+    function blankDiv(resDiv,resQty)
+    {
+    	var msg;
+    	msg='&nbsp;';
+		    if(document.getElementById(resDiv))
+	        {
+	        	document.getElementById(resDiv).innerHTML=msg;
+	        	document.getElementById(resDiv).style.display="block";
+
+	        }
+    }
+    function showStickySuccessToast(msg) {
+        $().toastmessage('showToast', {
+            text: msg,
+            sticky: false,
+            position: 'top-center',
+            type: 'success',
+            closeText: '',
+            close: function () {
+
+            }
+        });
+
+    }
+    simpleCart.bind( 'load' , function(){
+
+
+		var items = [];
+		var divId;
+		var pId;
+		var pQty
+		var bMsg;
+		simpleCart.each(function( item , x ){
+			pId=item.get('prodid')
+		    items.push(pId);
+		    divId=pId+'Block';
+		    pQty=item.get('quantity');
+		    writeDiv(divId,pQty);
+
+		});
+
+		console.log( items );
+
+
+
+	});
+
+    simpleCart.bind("afterAdd", function (item, isNew) {
+        var sendMsg;
+        var pQty=item.get('quantity');
+        var pId=item.get('prodid');
+        var bMsg;
+        var divId=pId+'Block';
+
+        sendMsg='<br>';
+        if (isNew) {
+            sendMsg += pId +' '+ pQty +' '+ item.get('name') + " added to cart";
+        } else {
+            sendMsg += pId +' '+ pQty +' '+ "total  " + item.get('name') + " in cart";
+        }
+
+        if(pQty>0)
+        {
+        	writeDiv(divId,pQty);
+        }else{
+        	blankDiv(divId,pQty);
+        }
+
+        hideQty(pId);
+
+        showStickySuccessToast(sendMsg);
+
+    });
+
+    function showQty(pId)
+    {
+    	var divId;
+    	var divId2;
+    	divId=pId+'QtyBlock';
+    	divId2=pId+'AddBlock';
+    	if(document.getElementById(divId))
+    	{
+    		document.getElementById(divId).style.display="block";
+    	}
+    	if(document.getElementById(divId2))
+    	{
+    		document.getElementById(divId2).style.display="none";
+    	}
+    }
+
+    function hideQty(pId)
+    {
+    	var divId;
+    	var divId2;
+    	divId=pId+'QtyBlock';
+    	divId2=pId+'AddBlock';
+    	if(document.getElementById(divId))
+    	{
+    		document.getElementById(divId).style.display="none";
+    	}
+    	if(document.getElementById(divId2))
+    	{
+    		document.getElementById(divId2).style.display="block";
+    	}
+    }
+
+            </script>
+            <script>
+      simpleCart({
+
+        checkout: {
+            type: "SendForm",
+            url: "http://devlab.countertrade.com/checkouttest.aspx"
+        },
+        cartStyle: 'table',
+        shippingTotalRate: 0.03,
+      });
+            </script>
+            <script>
+			$(document).ready(function(){
+
+				$(".inline").colorbox({inline:true});
+
+
+
+			});
+            </script>
+
+
+            <div id="cart">
+                <div class="heading">
+
+                    <a>Your cart: <span class="simpleCart_quantity">0</span> item(s) - <span class="simpleCart_grandTotal">$0.00</span><span id="ct"></span>&nbsp;<img src="/content/images/themes/bigshop/bullet-d.png" title="CounterTrade Ecommerce" alt="CounterTrade Ecommerce"></a>
+                </div>
+
+                <div class="content">
+                    <div class="mini-cart-info">
+                        <div class="simpleCart_items"> <table><thead><tr class="headerRow"><th class="item-name">Name</th><th class="item-price">Price</th><th class="item-decrement"></th><th class="item-quantity">Qty</th><th class="item-increment"></th><th class="item-total">SubTotal</th><th class="item-remove"></th></tr></thead></table></div>
+                    </div>
+
+
+                    <div class="mini-cart-total">
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td class="right"><b>Sub-Total:</b></td>
+                                    <td class="right"><div class="simpleCart_total">$0.00</div></td>
+                                </tr>
+                                <tr>
+                                    <td class="right"><b>Shipping &amp; Handling:</b></td>
+                                    <td class="right"><div class="simpleCart_shipping">$0.00</div></td>
+                                </tr>
+                                <tr>
+                                    <td class="right"><b>Total:</b></td>
+                                    <td class="right"><div class="simpleCart_grandTotal">$0.00</div></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="checkout">
+                        <a href="javascript:;" class="simpleCart_empty"><input type="button" class="button" value="Clear Cart"></a>
+                        &nbsp; <a href="http://devlab.countertrade.com/cart.html" class="button">View Cart</a> &nbsp; <a href="javascript:;" class="simpleCart_checkout"><input type="button" class="button" value="Checkout"></a>
+                    </div>
+                </div>
+
+            </div>
+            <!--Mini Cart End-->
+        </div>
+
+        <!--Top Navigation Start-->
+
+        <div id="menu">
+            <span>Menu</span>
+            <ul>
+                <li class="home"><a title="Home" href="http://devlab.countertrade.com/Home.aspx"><span>Home</span></a></li>
+                <li>
+                    <a href="">Products</a>
+                    <div>
+                        <ul>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=1001" ?catid="1001">Systems</a></li>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=1002" ?catid="1002">Displays &amp; Projectors</a></li>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=1003" ?catid="1003">Printers &amp; Scanners</a></li>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=1004" ?catid="1004">Storage &amp; Memory</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=1005" ?catid="1005">Networking</a></li>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=1006" ?catid="1006">Components &amp; Accessories</a></li>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=2001" ?catid="2001">Applications</a></li>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=2002" ?catid="2002">Operating Systems</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=2003" ?catid="2003">Games</a></li>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=3001" ?catid="3001">Communication</a></li>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=3002" ?catid="3002">Navigation</a></li>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=3003" ?catid="3003">Audio &amp; Video</a></li>
+                        </ul>
+                        <ul>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=3004" ?catid="3004">Cameras &amp; Camcorders</a></li>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=3005" ?catid="3005">Photo Equipment</a></li>
+                            <li><a href="http://devlab.countertrade.com/category.aspx?CatID=3006" ?catid="3006">Optical Equipment</a></li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a href="http://devlab.countertrade.com/aboutus.aspx">About Us</a></li>
+                <li><a href="http://devlab.countertrade.com/faq.aspx">FAQs</a></li>
+                <li><a href="http://devlab.countertrade.com/contactus.aspx">Contact Us</a></li>
+
+            </ul>
+        </div>
+        <!--Top Navigation Start-->
+
+        <div id="container">
+            <!--Left Part-->
+            <div id="column-left">
+                <!--Categories Part Start-->
+             <div id="partialCategories">
+            </div>
+    
+
+                        @*<div class="box">
+                        <div class="box-heading"><span>Categories</span></div>
+                        <div class="box-content  box-category">
+                            <ul id="custom_accordion">
+                                <li class="category1001 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=1001">Systems<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;">
+                                        <li class="category100101"><a class="nochild " href="http://devlab.countertrade.com/category.aspx?SubCatID=100101">Desktops &amp; Workstations</a></li>
+                                        <li class="category100102"><a class="nochild " href="http://devlab.countertrade.com/category.aspx?SubCatID=100102">Notebooks / Laptops</a></li>
+                                        <li class="category100103"><a class="nochild " href="http://devlab.countertrade.com/category.aspx?SubCatID=100103">eBook Readers &amp; Handhelds</a></li>
+                                        <li class="category100104"><a class="nochild " href="http://devlab.countertrade.com/category.aspx?SubCatID=100104">Servers</a></li>
+                                    </ul>
+                                </li>
+                                <li class="category1002 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=1002">Displays &amp; Projectors<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;">
+                                        <li class="category100201"><a class="nochild " href="http://devlab.countertrade.com/category.aspx?SubCatID=100201">Monitors</a></li>
+                                        <li class="category100202"><a class="nochild " href="http://devlab.countertrade.com/category.aspx?SubCatID=100202">Large Format Monitors</a></li>
+                                        <li class="category100303"><a class="nochild " href="http://devlab.countertrade.com/category.aspx?SubCatID=100303">Projectors</a></li>
+                                    </ul>
+                                </li>
+                                <li class="category1003 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=1003">Printers &amp; Scanners<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                                <li class="category1004 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=1004">Storage &amp; Memory<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                                <li class="category1005 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=1005">Networking<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                                <li class="category1006 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=1006">Components &amp; Accessories<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                                <li class="category1007 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=1007">Hardware Service &amp; Support<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                                <li class="category2001 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=2001">Applications<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                                <li class="category2002 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=2002">Operating Systems<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                                <li class="category2003 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=2003">Games<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                                <li class="category2004 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=2004">Software Service &amp; Support<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                                <li class="category3001 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=3001">Communication<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                                <li class="category3002 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=3002">Navigation<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                                <li class="category3003 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=3003">Audio &amp; Video<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                                <li class="category3004 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=3004">Cameras &amp; Camcorders<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                                <li class="category3005 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=3005">Photo Equipment<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                                <li class="category3006 custom-parent-li">
+                                    <a class="cuuchild  custom-parent" href="http://devlab.countertrade.com/category.aspx?CatID=3006">Optical Equipment<span class="dcjq-icon"></span></a> <span class="down"></span>
+                                    <ul style="display: none;"></ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>*@
+                        <!--Categories Part End-->
+
+                    </div>
+                    <!--Left End-->
+                    <!--Middle Part Start-->
+                    <div id="content">
+                        <p class="welcome"></p>
+                        @RenderBody()
+                        <!--Featured Product Part Start-->
+
+                        <div class="box">
+                            <div class="box-heading"><span>Featured</span></div>
+                            <div class="box-content">
+                                <div class="box-product">
+                                    <div class="simpleCart_shelfItem">
+                                        <div class="image"><a href="testProd.html?id=1234"><img src="/content/images/product/3eda08e7-26d8-4c1c-a3b3-80ea1967afbe.jpg"></a></div>
+                                        <div class="item_name"><a href="testProd.html?id=1234">Lenovo ThinkPad Edge 15 "</a></div>
+                                        <div class="item_prodid" style="display:none">1234</div>
+                                        <div class="item_price">$761.03</div>
+                                        <div class="item_rating"><img src="/content/images/themes/bigshop/stars-0.png" alt="Based on 0 reviews."></div>
+                                        <div><p><a class='inline button' href="#prod1234">Add to cart</a></p></div>
+
+                                    </div>
+                                    <div class="simpleCart_shelfItem">
+                                        <div class="image"><a href="testProd.html?id=4567"><img src="/content/images/product/c520a43c-e666-4ffe-8053-205799cc97e1.jpg"></a></div>
+                                        <div class="item_name"><a href="testProd.html?id=4567">Dell Venue</a></div>
+                                        <div class="item_prodid" style="display:none">4567</div>
+                                        <div class="item_price">$191.81</div>
+                                        <div class="item_rating"><img src="/content/images/themes/bigshop/stars-0.png" alt="Based on 0 reviews."></div>
+                                        <div><p><a class='inline button' href="#prod4567">Add to cart</a></p></div>
+                                    </div>
+                                    <div class="simpleCart_shelfItem">
+                                        <div class="image"><a href="testProd.html?id=1234"><img src="/content/images/product/b6617971-d2a7-4c6c-81af-4052244d83ef.jpg"></a></div>
+                                        <div class="item_name"><a href="http://devlab.countertrade.com/home.aspx#">Axiom</a></div>
+                                        <div class="item_prodid" style="display:none">1234</div>
+                                        <div class="item_price">$258.87</div>
+                                        <div class="item_rating"><img src="/content/images/themes/bigshop/stars-0.png" alt="Based on 0 reviews."></div>
+                                        <div class="item_add"><input type="button" value="Add to Cart" class="button"></div>
+                                    </div>
+                                    <div class="simpleCart_shelfItem">
+                                        <div class="image"><a href="http://devlab.countertrade.com/home.aspx#"><img src="/content/images/product/60fb3d92-f79a-4868-b4bf-ee23e732d445.jpg"></a></div>
+                                        <div class="item_name"><a href="http://devlab.countertrade.com/home.aspx#">Planar	PT1745R</a></div>
+                                        <div class="item_prodid" style="display:none">1234</div>
+                                        <div class="item_price">$651.67</div>
+                                        <div class="item_rating"><img src="/content/images/themes/bigshop/stars-0.png" alt="Based on 0 reviews."></div>
+                                        <div class="item_add"><input type="button" value="Add to Cart" class="button"></div>
+                                    </div>
+                                    <div class="simpleCart_shelfItem">
+                                        <div class="image"><a href="http://devlab.countertrade.com/home.aspx#"><img src="/content/images/product/5ae64a0f-5d6f-442e-8d52-7ec2c9786ce0.jpg"></a></div>
+                                        <div class="item_name"><a href="http://devlab.countertrade.com/home.aspx#">Microsoft Xbox	360</a></div>
+                                        <div class="item_prodid" style="display:none">1234</div>
+                                        <div class="item_price">$29.25</div>
+                                        <div class="item_rating"><img src="/content/images/themes/bigshop/stars-0.png" alt="Based on 0 reviews."></div>
+                                        <div class="item_add"><input type="button" value="Add to Cart" class="button"></div>
+                                    </div>
+                                    <div class="simpleCart_shelfItem">
+                                        <div class="image"><a href="http://devlab.countertrade.com/home.aspx#"><img src="/content/images/product/13fba064-db2d-4de6-b139-6ebabb5755e2.jpg"></a></div>
+                                        <div class="item_name"><a href="http://devlab.countertrade.com/home.aspx#">Zoom SoftModem	0885</a></div>
+                                        <div class="item_prodid" style="display:none">1234</div>
+                                        <div class="item_price">$211.03</div>
+                                        <div class="item_rating"><img src="/content/images/themes/bigshop/stars-0.png" alt="Based on 0 reviews."></div>
+                                        <div class="item_add"><input type="button" value="Add to Cart" class="button"></div>
+                                    </div>
+                                    <div class="simpleCart_shelfItem">
+                                        <div class="image"><a href="http://devlab.countertrade.com/home.aspx#"><img src="/content/images/product/3090f5e0-c2b1-49b5-a6b8-20b584562187.jpg"></a></div>
+                                        <div class="item_name"><a href="http://devlab.countertrade.com/home.aspx#">Dell	1210S</a></div>
+                                        <div class="item_prodid" style="display:none">1234</div>
+                                        <div class="item_price">$328.39</div>
+                                        <div class="item_rating"><img src="/content/images/themes/bigshop/stars-0.png" alt="Based on 0 reviews."></div>
+                                        <div class="item_add"><input type="button" value="Add to Cart" class="button"></div>
+                                    </div>
+                                    <div class="simpleCart_shelfItem">
+                                        <div class="image"><a href="http://devlab.countertrade.com/home.aspx#"><img src="/content/images/product/c3050f87-d777-4fe7-8dcb-967161f1d87b.jpg"></a></div>
+                                        <div class="item_name"><a href="http://devlab.countertrade.com/home.aspx#">Zebra	TTP 2110</a></div>
+                                        <div class="item_prodid" style="display:none">1234</div>
+                                        <div class="item_price">$828.09</div>
+                                        <div class="item_rating"><img src="/content/images/themes/bigshop/stars-0.png" alt="Based on 0 reviews."></div>
+                                        <div class="item_add"><input type="button" value="Add to Cart" class="button"></div>
+                                    </div>
+                                    <div class="simpleCart_shelfItem">
+                                        <div class="image"><a href="http://devlab.countertrade.com/home.aspx#"><img src="/content/images/product/c1b095d1-548c-4321-a843-1992a1b7d0d7.jpg"></a></div>
+                                        <div class="item_name"><a href="http://devlab.countertrade.com/home.aspx#">LG	22LQ630H</a></div>
+                                        <div class="item_prodid" style="display:none">1234</div>
+                                        <div class="item_price">$395.37</div>
+                                        <div class="item_rating"><img src="/content/images/themes/bigshop/stars-0.png" alt="Based on 0 reviews."></div>
+                                        <div class="item_add"><input type="button" value="Add to Cart" class="button"></div>
+                                    </div>
+                                    <div class="simpleCart_shelfItem">
+                                        <div class="image"><a href="http://devlab.countertrade.com/home.aspx#"><img src="/content/images/product/ac2d31e0-5863-46e8-8763-c2ebb3ca9b38.jpg"></a></div>
+                                        <div class="item_name"><a href="http://devlab.countertrade.com/home.aspx#">Klipsch KA-1000-THX</a></div>
+                                        <div class="item_prodid" style="display:none">1234</div>
+                                        <div class="item_price">$748.26</div>
+                                        <div class="item_rating"><img src="/content/images/themes/bigshop/stars-0.png" alt="Based on 0 reviews."></div>
+                                        <div class="item_add"><input type="button" value="Add to Cart" class="button"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Featured Product Part End-->
+
+                    </div>
+                    <!--Middle Part End-->
+                    <div class="clear"></div>
+
+                </div>
+            </div>
+    <!--Footer Part Start-->
+
+    <div id="footer">
+
+        <div class="column">
+            <h3>Information</h3>
+            <ul>
+                <li><a href="http://devlab.countertrade.com/aboutus.aspx">About Us</a></li>
+                <li><a href="http://devlab.countertrade.com/deliveryinfo.aspx">Delivery Information</a></li>
+                <li><a href="http://devlab.countertrade.com/privacypolicy.aspx">Privacy Policy</a></li>
+                <li><a href="http://devlab.countertrade.com/elements.aspx">Elements</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <h3>Customer Service</h3>
+            <ul>
+                <li><a href="http://devlab.countertrade.com/contactus.aspx">Contact Us</a></li>
+                <li><a href="http://devlab.countertrade.com/returns.aspx">Returns</a></li>
+                <li><a href="http://devlab.countertrade.com/sitemap.aspx">Site Map</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <h3>Extras</h3>
+            <ul>
+                <li><a href="http://devlab.countertrade.com/brands.aspx">Brands</a></li>
+                <li><a href="http://devlab.countertrade.com/giftvouchers.aspx">Gift Vouchers</a></li>
+                <li><a href="http://devlab.countertrade.com/affiliates.aspx">Affiliates</a></li>
+                <li><a href="http://devlab.countertrade.com/specials.aspx">Specials</a></li>
+            </ul>
+        </div>
+        <div class="column">
+            <h3>My Account</h3>
+            <ul>
+                <li><a href="http://devlab.countertrade.com/myaccount.aspx">My Account</a></li>
+                <li><a href="http://devlab.countertrade.com/orderhistory.aspx">Order History</a></li>
+                <li><a href="http://devlab.countertrade.com/wishlist.aspx">Wish List</a></li>
+                <li><a href="http://devlab.countertrade.com/newsletter.aspx">Newsletter</a></li>
+            </ul>
+        </div>
+        <div class="contact">
+            <h3></h3>
+            <ul>
+                <li class="address">7585 West 66th Ave. Arvada, CO 80003</li>
+                <li class="mobile">(303) 424-9710</li>
+                <li class="email"><a href="mailto:info@Countertrade.com">info@countertrade.com</a></li>
+                <li class="fax">(303) 421-8225</li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <div id="powered">
+            <div class="payments_types"> <img src="/content/images/themes/bigshop/payment_american.png" alt="american-express" title="American Express"> <img src="/content/images/themes/bigshop/payment_discover.png" alt="discover" title="Discover"> <img src="/content/images/themes/bigshop/payment_mastercard.png" alt="mastercard" title="MasterCard"> <img src="/content/images/themes/bigshop/payment_visa.png" alt="visa" title="Visa"> </div>
+        </div>
+    </div>
+    <!-- This contains the hidden content for inline calls Product 1234 -->
+    <div style='display:none'>
+
+        <div id='prod1234'>
+            <div class="box">
+                <div><button type="button" id="cboxClose">close</button></div>
+                <div class="simpleCart_shelfItem">
+                    <div id="1234Block" style="display:none"></div>
+                    <div class="image"><a href="http://devlab.countertrade.com/home.aspx#"><img src="/content/images/product/3eda08e7-26d8-4c1c-a3b3-80ea1967afbe.jpg"></a></div>
+                    <div class="item_name"><a href="http://devlab.countertrade.com/home.aspx#">Lenovo ThinkPad Edge 15"</a></div>
+                    <div class="item_prodid" style="display:none">1234</div>
+                    <div class="item_price">$761.03</div>
+                    <div id="1234QtyBlock">
+                        <div class="qty">
+                            <strong>Qty to add:</strong> <input type="text" value="1" size="2" name="quantity" class="item_Quantity">
+                        </div>
+                        <div class="item_add"><input type="button" value="Add to Cart" class="button"></div>
+                    </div>
+                    <div id="1234AddBlock" style="display:none">
+                        <a onclick="showQty('1234')">Add more to cart</a>
+                    </div>
+                </div>
+
+                <div class="box-heading"><span>Accessories</span></div>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="simpleCart_shelfItem">
+                                <div id="99999Block" style="display:none"></div>
+                                <div class="image"><a href="http://devlab.countertrade.com/home.aspx#"><img src="/content/images/product/c520a43c-e666-4ffe-8053-205799cc97e1.jpg"></a></div>
+                                <div class="item_name">Accessory #1</div>
+                                <div class="item_prodid" style="display:none">99999</div>
+                                <div class="item_price">$47.22</div>
+                                <div id="99999QtyBlock">
+                                    <div class="qty">
+                                        <strong>Qty:</strong> <input type="text" value="1" size="2" name="quantity" class="item_Quantity">
+                                    </div>
+                                    <div class="item_add"><input type="button" value="Add to Cart" class="button"></div>
+                                </div>
+                                <div id="99999AddBlock" style="display:none">
+                                    <a onclick="showQty('99999')">Add more to cart</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="simpleCart_shelfItem">
+                                <div id="8888Block" style="display:none"></div>
+                                <div class="image"><a href="http://devlab.countertrade.com/home.aspx#"><img src="/content/images/product/c520a43c-e666-4ffe-8053-205799cc97e1.jpg"></a></div>
+                                <div class="item_name">Accessory #2</div>
+                                <div class="item_prodid" style="display:none">8888</div>
+                                <div class="item_price">$102.99</div>
+                                <div id="8888QtyBlock">
+                                    <div class="qty">
+                                        <strong>Qty:</strong>
+                                        <input type="text" value="1" size="2" name="quantity" class="item_Quantity">
+                                    </div>
+                                    <div class="item_add"><input type="button" value="Add to Cart" class="button"></div>
+                                </div>
+                                <div id="8888AddBlock" style="display:none">
+                                    <a onclick="showQty('8888')">Add more to cart</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- This contains the hidden content for inline calls Product 4567 -->
+    <div style='display:none'>
+        <div id='prod4567' style='padding:10px; background:#fff;'>
+            <div class="box">
+
+                <div class="simpleCart_shelfItem">
+                    <div id="4567Block" style="display:none"></div>
+                    <div class="image"><a href="http://devlab.countertrade.com/home.aspx#"><img src="/content/images/product/c520a43c-e666-4ffe-8053-205799cc97e1.jpg"></a></div>
+                    <div class="item_name"><a href="http://devlab.countertrade.com/home.aspx#">Dell Venue</a></div>
+                    <div class="item_prodid" style="display:none">4567</div>
+                    <div class="item_price">$191.81</div>
+                    <div class="item_rating"><img src="/content/images/themes/bigshop/stars-0.png" alt="Based on 0 reviews."></div>
+                    <div id="4567QtyBlock">
+                        <div class="qty">
+                            <strong>Qty:</strong>
+                            <input type="text" value="1" size="2" name="quantity" class="item_Quantity">
+                        </div>
+                        <div class="item_add"><input type="button" value="Add to Cart" class="button"></div>
+                    </div>
+                    <div id="4567AddBlock" style="display:none">
+                        <a onclick="showQty('4567')">Add more to cart</a>
+                    </div>
+                </div>
+
+                <div class="box-heading"><span>Accessories</span></div>
+                <table>
+                    <tr>
+                        <td>
+                            <div class="simpleCart_shelfItem">
+                                <div id="6565Block" style="display:none"></div>
+                                <div class="image"><a href="http://devlab.countertrade.com/home.aspx#"><img src="/content/images/product/c520a43c-e666-4ffe-8053-205799cc97e1.jpg"></a></div>
+                                <div class="item_name">Accessory #3</div>
+                                <div class="item_prodid" style="display:none">6565</div>
+                                <div class="item_price">$47.22</div>
+                                <div id="6565QtyBlock">
+                                    <div class="qty">
+                                        <strong>Qty:</strong>
+                                        <input type="text" value="1" size="2" name="quantity" class="item_Quantity">
+                                    </div>
+                                    <div class="item_add"><input type="button" value="Add to Cart" class="button"></div>
+                                </div>
+                                <div id="6565AddBlock" style="display:none">
+                                    <a onclick="showQty('6565')">Add more to cart</a>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="simpleCart_shelfItem">
+                                <div id="66666Block" style="display:none"></div>
+                                <div class="image"><a href="http://devlab.countertrade.com/home.aspx#"><img src="/content/images/product/c520a43c-e666-4ffe-8053-205799cc97e1.jpg"></a></div>
+                                <div class="item_name">Accessory #4</div>
+                                <div class="item_prodid" style="display:none">66666</div>
+                                <div class="item_price">$75.99</div>
+                                <div id="66666QtyBlock">
+                                    <div class="qty">
+                                        <strong>Qty:</strong>
+                                        <input type="text" value="1" size="2" name="quantity" class="item_Quantity">
+                                    </div>
+
+                                    <div class="item_add"><input type="button" value="Add to Cart" class="button"></div>
+                                </div>
+                                <div id="66666AddBlock" style="display:none">
+                                    <a onclick="showQty('66666')">Add more to cart</a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="~/Scripts/themes/bigshop/custom.js"></script>
+    <!--Footer Part End-->
+</body>
+</html>

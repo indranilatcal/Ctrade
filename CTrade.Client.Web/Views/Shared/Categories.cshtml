@@ -1,0 +1,26 @@
+﻿@model CTrade.Client.Web.Areas.Admin.Models.ManageCategoriesViewModel
+<div id="box" class="box">
+    <div class="box-heading"><span>Categories</span></div>
+    <div id="box-content" class="box-content  box-category">
+        <ul id="custom_accordion">
+            @foreach (var category in Model.Categories)
+            {
+                <li class="category@(category.Id) custom-parent-li">
+                    <a class="cuuchild  custom-parent" href="#">@category.Label<span class="dcjq-icon"></span></a> <span class="down"></span>
+                    <ul style="display: none;">
+                        @foreach (var subcategory in category.SubCategories)
+                        {
+                            @*<li class="category100101"><a class="nobchild " href="http://devlab.countertrade.com/category.aspx?SubCatID=100101">Desktops &amp; Workstations</a></li>*@
+                            if (subcategory.Included)
+                            {
+                                <li class="category@(subcategory.Id)">
+                                    <a class="nochild " href="#">@Html.Encode(subcategory.Label)</a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

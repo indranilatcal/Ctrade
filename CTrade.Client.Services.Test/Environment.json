@@ -1,0 +1,56 @@
+﻿[
+    {
+        "Key": "FAQ",
+        "Info": {
+            "UserName": "indranilatcal",
+            "DbName": "faqtest",
+            "Key": "athanderearkileyeshostio",
+            "Password": "rdtayMOoc86Yo8SsHPaIqJcF"
+        }
+    },
+    {
+        "Key": "Categories",
+        "Info": {
+            "UserName": "indranilatcal",
+            "DbName": "categoriestest",
+            "Key": "ngentedidursiesseneseven",
+            "Password": "aADsGlu8awgn7qPEUSBIvC2x"
+        }
+    },
+    {
+        "Key": "Promotions",
+        "Info": {
+            "UserName": "indranilatcal",
+            "DbName": "promotionstest",
+            "Key": "omedlyinsweloccersumsers",
+            "Password": "XPuiQWbHBgVhJwm5RaVMnML8"
+        }
+    },
+    {
+        "Key": "DynamicPages",
+        "Info": {
+            "UserName": "indranilatcal",
+            "DbName": "dynapagetest",
+            "Key": "onionewitencepstiondsore",
+            "Password": "DhektDN6ygDxAGQ7ctvRRcsU"
+        }
+    },
+    {
+        "Key": "Master",
+        "Info": {
+            "UserName": "indranilatcal",
+            "DbName": "apitest",
+            "Key": "anchellyveryouttedstents",
+            "Password": "BngjsaSuFecMxwL0lgCHYkng"
+        }
+    },
+    {
+        "Key": "ApiTest",
+        "Info": {
+            "UserName": "indranilatcal",
+            "DbName": "apitest",
+            "Key": "belleasthencessivinglisl",
+            "Password": "6U6fk2CkLcJ25TCscHsl8K7B"
+        }
+    }
+]

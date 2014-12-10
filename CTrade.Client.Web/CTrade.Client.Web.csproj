@@ -1,0 +1,818 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{ABE67ED0-1250-4DCC-9917-AF5B4173BF83}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CTrade.Client.Web</RootNamespace>
+    <AssemblyName>CTrade.Client.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EnsureThat, Version=2.0.0.39118, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ensure.That.2.0.0\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\EnsureThat.dll\EnsureThat.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity, Version=1.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Configuration">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.Mvc">
+      <HintPath>..\packages\Unity.Mvc.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
+    </Reference>
+    <Reference Include="MyCouch.Cloudant.Net45">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MyCouch.Cloudant.2.6.0\lib\net45\MyCouch.Cloudant.Net45.dll</HintPath>
+    </Reference>
+    <Reference Include="MyCouch.Net45">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MyCouch.2.6.0\lib\net45\MyCouch.Net45.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=3.1.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\NLog.3.1.0.0\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Reactive.Core, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net45\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net45\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net45\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.PlatformServices, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.2\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.2\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.2\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivatorEx.2.0\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\UnityConfig.cs" />
+    <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DynamicContentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FAQController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PromotionController.cs" />
+    <Compile Include="Areas\Admin\Models\ManageQuestionsForSiteViewModel.cs" />
+    <Compile Include="Areas\Admin\Models\Override.cs" />
+    <Compile Include="Areas\Admin\Models\PageContent.cs" />
+    <Compile Include="Areas\Admin\Models\Promotion.cs" />
+    <Compile Include="Areas\Admin\Models\Question.cs" />
+    <Compile Include="Constant.cs" />
+    <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\SitesController.cs" />
+    <Compile Include="ExceptionLoggerFilter.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\ConfigHelper.cs" />
+    <Compile Include="Areas\Admin\Models\Category.cs" />
+    <Compile Include="Areas\Admin\Models\ManageCategoriesViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\CategoryServiceFactory.cs" />
+    <Compile Include="Services\DbRepositoryFactory.cs" />
+    <Compile Include="Services\FAQServiceFactory.cs" />
+    <Compile Include="Services\PageContentServiceFactory.cs" />
+    <Compile Include="Services\PromotionServiceFactory.cs" />
+    <Compile Include="Services\SiteService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Images\bg-input-focus.png" />
+    <Content Include="Content\Images\bg-input.png" />
+    <Content Include="Content\Images\border.png" />
+    <Content Include="Content\Images\close.gif" />
+    <Content Include="Content\Images\controls.png" />
+    <Content Include="Content\Images\CTLogo.gif" />
+    <Content Include="Content\Images\ctLogo.jpg" />
+    <Content Include="Content\Images\error.png" />
+    <Content Include="Content\Images\input-spinner.gif" />
+    <Content Include="Content\Images\notice.png" />
+    <Content Include="Content\Images\overlay-icon.png" />
+    <Content Include="Content\Images\portlet-collapse-icon.png" />
+    <Content Include="Content\Images\portlet-config-icon.png" />
+    <Content Include="Content\Images\portlet-expand-icon.png" />
+    <Content Include="Content\Images\portlet-reload-icon.png" />
+    <Content Include="Content\Images\portlet-remove-icon.png" />
+    <Content Include="Content\Images\product\13fba064-db2d-4de6-b139-6ebabb5755e2.jpg" />
+    <Content Include="Content\Images\product\3090f5e0-c2b1-49b5-a6b8-20b584562187.jpg" />
+    <Content Include="Content\Images\product\3eda08e7-26d8-4c1c-a3b3-80ea1967afbe.jpg" />
+    <Content Include="Content\Images\product\5ae64a0f-5d6f-442e-8d52-7ec2c9786ce0.jpg" />
+    <Content Include="Content\Images\product\60fb3d92-f79a-4868-b4bf-ee23e732d445.jpg" />
+    <Content Include="Content\Images\product\ac2d31e0-5863-46e8-8763-c2ebb3ca9b38.jpg" />
+    <Content Include="Content\Images\product\b6617971-d2a7-4c6c-81af-4052244d83ef.jpg" />
+    <Content Include="Content\Images\product\c1b095d1-548c-4321-a843-1992a1b7d0d7.jpg" />
+    <Content Include="Content\Images\product\c3050f87-d777-4fe7-8dcb-967161f1d87b.jpg" />
+    <Content Include="Content\Images\product\c520a43c-e666-4ffe-8053-205799cc97e1.jpg" />
+    <Content Include="Content\Images\remove-icon-small.png" />
+    <Content Include="Content\Images\sort_asc.png" />
+    <Content Include="Content\Images\sort_asc_disabled.png" />
+    <Content Include="Content\Images\sort_both.png" />
+    <Content Include="Content\Images\sort_desc.png" />
+    <Content Include="Content\Images\sort_desc_disabled.png" />
+    <Content Include="Content\Images\sprite.png" />
+    <Content Include="Content\Images\success.png" />
+    <Content Include="Content\Images\switch.png" />
+    <Content Include="Content\Images\themes\bigshop\add.png" />
+    <Content Include="Content\Images\themes\bigshop\arrow-down.png" />
+    <Content Include="Content\Images\themes\bigshop\arrows-up.png" />
+    <Content Include="Content\Images\themes\bigshop\arrows.png" />
+    <Content Include="Content\Images\themes\bigshop\attention.png" />
+    <Content Include="Content\Images\themes\bigshop\background.png" />
+    <Content Include="Content\Images\themes\bigshop\blank.gif" />
+    <Content Include="Content\Images\themes\bigshop\blogger.png" />
+    <Content Include="Content\Images\themes\bigshop\bullet-1.png" />
+    <Content Include="Content\Images\themes\bigshop\bullet-d.png" />
+    <Content Include="Content\Images\themes\bigshop\bullets.png" />
+    <Content Include="Content\Images\themes\bigshop\button-next.png" />
+    <Content Include="Content\Images\themes\bigshop\button-previous.png" />
+    <Content Include="Content\Images\themes\bigshop\button-search.png" />
+    <Content Include="Content\Images\themes\bigshop\cart-add.png" />
+    <Content Include="Content\Images\themes\bigshop\cart-bg.png" />
+    <Content Include="Content\Images\themes\bigshop\close.png" />
+    <Content Include="Content\Images\themes\bigshop\contact-icon.png" />
+    <Content Include="Content\Images\themes\bigshop\download.png" />
+    <Content Include="Content\Images\themes\bigshop\facebook.png" />
+    <Content Include="Content\Images\themes\bigshop\favicon.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ad.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ae.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\af.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ag.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ai.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\al.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\am.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\an.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ao.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ar.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\as.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\at.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\au.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\aw.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ax.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\az.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ba.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bb.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bd.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\be.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bf.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bg.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bh.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bi.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bj.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bm.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bn.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bo.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\br.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bs.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bt.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bv.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bw.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\by.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\bz.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ca.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\cc.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\cd.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\cf.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\cg.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ch.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ci.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ck.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\cl.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\cm.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\cn.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\co.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\cr.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\cs.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\cu.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\cv.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\cx.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\cy.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\cz.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\de.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\dj.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\dk.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\dm.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\do.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\dz.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ec.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ee.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\eg.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\eh.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\england.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\er.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\es.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\et.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\fam.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\fi.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\fj.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\fk.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\fm.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\fo.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\fr.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ga.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gb.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gd.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ge.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gh.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gi.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gl.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gm.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gn.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gp.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gq.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gr.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gs.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gt.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gu.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gw.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\gy.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\hk.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\hn.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\hr.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ht.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\hu.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\id.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ie.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\il.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\in.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\io.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\iq.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ir.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\is.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\it.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\jm.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\jo.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\jp.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ke.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\kg.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\kh.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ki.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\km.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\kn.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\kp.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\kr.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\kw.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ky.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\kz.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\la.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\lb.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\lc.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\li.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\lk.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\lr.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ls.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\lt.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\lu.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\lv.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ly.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ma.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mc.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\md.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mg.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mh.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mk.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ml.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mm.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mn.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mo.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mp.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mq.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mr.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ms.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mt.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mu.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mv.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mw.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mx.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\my.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\mz.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\na.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\nc.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ne.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\nf.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ng.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ni.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\nl.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\no.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\np.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\nr.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\nu.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\nz.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\om.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\pa.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\pe.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\pf.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\pg.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ph.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\pk.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\pl.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\pm.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\pn.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\pr.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ps.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\pt.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\pw.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\py.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\qa.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ro.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ru.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\rw.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\sa.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\sb.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\sc.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\scotland.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\sd.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\se.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\sg.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\sh.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\si.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\sk.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\sl.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\sm.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\sn.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\so.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\sr.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\st.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\sv.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\sy.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\sz.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\tc.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\td.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\tf.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\tg.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\th.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\tj.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\tk.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\tl.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\tm.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\tn.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\to.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\tr.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\tt.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\tv.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\tw.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\tz.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ua.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ug.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\um.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\us.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\uy.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\uz.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\va.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\vc.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ve.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\vg.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\vi.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\vn.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\vu.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\wales.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\wf.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ws.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\ye.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\yt.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\za.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\zm.png" />
+    <Content Include="Content\Images\themes\bigshop\flags\zw.png" />
+    <Content Include="Content\Images\themes\bigshop\flickr.png" />
+    <Content Include="Content\Images\themes\bigshop\googleplus.png" />
+    <Content Include="Content\Images\themes\bigshop\gplus.png" />
+    <Content Include="Content\Images\themes\bigshop\home-icon.png" />
+    <Content Include="Content\Images\themes\bigshop\info.png" />
+    <Content Include="Content\Images\themes\bigshop\line-bg.png" />
+    <Content Include="Content\Images\themes\bigshop\list-icon.png" />
+    <Content Include="Content\Images\themes\bigshop\loading.gif" />
+    <Content Include="Content\Images\themes\bigshop\logo.png" />
+    <Content Include="Content\Images\themes\bigshop\menu-h.png" />
+    <Content Include="Content\Images\themes\bigshop\menu.png" />
+    <Content Include="Content\Images\themes\bigshop\mines.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\1.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\10.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\11.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\12.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\13.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\14.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\15.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\16.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\17.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\18.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\19.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\2.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\20.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\21.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\22.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\23.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\24.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\25.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\26.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\27.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\28.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\29.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\3.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\30.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\31.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\32.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\33.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\34.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\35.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\36.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\37.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\38.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\39.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\4.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\40.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\41.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\42.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\43.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\44.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\45.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\46.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\47.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\48.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\49.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\5.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\50.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\51.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\52.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\53.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\6.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\7.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\8.png" />
+    <Content Include="Content\Images\themes\bigshop\patterns\9.png" />
+    <Content Include="Content\Images\themes\bigshop\payment_2checkout.png" />
+    <Content Include="Content\Images\themes\bigshop\payment_american.png" />
+    <Content Include="Content\Images\themes\bigshop\payment_discover.png" />
+    <Content Include="Content\Images\themes\bigshop\payment_maestro.png" />
+    <Content Include="Content\Images\themes\bigshop\payment_mastercard.png" />
+    <Content Include="Content\Images\themes\bigshop\payment_moneybookers.png" />
+    <Content Include="Content\Images\themes\bigshop\payment_paypal.png" />
+    <Content Include="Content\Images\themes\bigshop\payment_sagepay.png" />
+    <Content Include="Content\Images\themes\bigshop\payment_visa.png" />
+    <Content Include="Content\Images\themes\bigshop\pinterest.png" />
+    <Content Include="Content\Images\themes\bigshop\plus.png" />
+    <Content Include="Content\Images\themes\bigshop\price-tag.png" />
+    <Content Include="Content\Images\product\apple_cinema_30-60x60.jpg" />
+    <Content Include="Content\Images\product\bag-152x152.jpg" />
+    <Content Include="Content\Images\product\brand_logo.jpg" />
+    <Content Include="Content\Images\product\canon_eos_5d_1-60x60.jpg" />
+    <Content Include="Content\Images\product\hp_1-152x152.jpg" />
+    <Content Include="Content\Images\product\hp_1-60x60.jpg" />
+    <Content Include="Content\Images\product\htc_touch_hd_1.jpg" />
+    <Content Include="Content\Images\product\htc_touch_hd_11.jpg" />
+    <Content Include="Content\Images\product\htc_touch_hd_11_350x350.jpg" />
+    <Content Include="Content\Images\product\htc_touch_hd_11_62x62.jpg" />
+    <Content Include="Content\Images\product\htc_touch_hd_1_350x350.jpg" />
+    <Content Include="Content\Images\product\htc_touch_hd_1_62x62.jpg" />
+    <Content Include="Content\Images\product\iphone_1-152x152.jpg" />
+    <Content Include="Content\Images\product\iphone_1-62x62.jpg" />
+    <Content Include="Content\Images\product\iphone_1.jpg" />
+    <Content Include="Content\Images\product\iphone_1_350x350.jpg" />
+    <Content Include="Content\Images\product\iphone_2.jpg" />
+    <Content Include="Content\Images\product\iphone_2_350x350.jpg" />
+    <Content Include="Content\Images\product\iphone_2_62x62.jpg" />
+    <Content Include="Content\Images\product\ipod_classic_1-152x152.jpg" />
+    <Content Include="Content\Images\product\ipod_classic_1-60x60.jpg" />
+    <Content Include="Content\Images\product\ipod_shuffle_1-152x152.jpg" />
+    <Content Include="Content\Images\product\ipod_touch_1-152x152.jpg" />
+    <Content Include="Content\Images\product\macbook_1-152x152.jpg" />
+    <Content Include="Content\Images\product\macbook_air_1-152x152.jpg" />
+    <Content Include="Content\Images\product\macbook_pro_1-60x60.jpg" />
+    <Content Include="Content\Images\product\samsung_syncmaster_941bw-152x152.jpg" />
+    <Content Include="Content\Images\product\samsung_tab_1-152x152.jpg" />
+    <Content Include="Content\Images\product\samsung_tab_1-60x60.jpg" />
+    <Content Include="Content\Images\product\sony_vaio_1-60x60.jpg" />
+    <Content Include="Content\Images\themes\bigshop\remove-small.png" />
+    <Content Include="Content\Images\themes\bigshop\remove.png" />
+    <Content Include="Content\Images\themes\bigshop\reorder.png" />
+    <Content Include="Content\Images\themes\bigshop\return.png" />
+    <Content Include="Content\Images\themes\bigshop\rss.png" />
+    <Content Include="Content\Images\themes\bigshop\skype.png" />
+    <Content Include="Content\Images\themes\bigshop\slider\slider-1.jpg" />
+    <Content Include="Content\Images\themes\bigshop\slider\slider-2.jpg" />
+    <Content Include="Content\Images\themes\bigshop\slider\slider-3.jpg" />
+    <Content Include="Content\Images\themes\bigshop\slider\slider-4.jpg" />
+    <Content Include="Content\Images\themes\bigshop\split.png" />
+    <Content Include="Content\Images\themes\bigshop\stars-0.png" />
+    <Content Include="Content\Images\themes\bigshop\stars-1.png" />
+    <Content Include="Content\Images\themes\bigshop\stars-2.png" />
+    <Content Include="Content\Images\themes\bigshop\stars-3.png" />
+    <Content Include="Content\Images\themes\bigshop\stars-4.png" />
+    <Content Include="Content\Images\themes\bigshop\stars-5.png" />
+    <Content Include="Content\Images\themes\bigshop\success.png" />
+    <Content Include="Content\Images\themes\bigshop\tab.png" />
+    <Content Include="Content\Images\themes\bigshop\twitter.png" />
+    <Content Include="Content\Images\themes\bigshop\update.png" />
+    <Content Include="Content\Images\themes\bigshop\vimeo.png" />
+    <Content Include="Content\Images\themes\bigshop\warning.png" />
+    <Content Include="Content\Images\themes\bigshop\youtube.png" />
+    <Content Include="Content\Images\themes\bigshop\zoom-plus.png" />
+    <Content Include="Content\Images\warning.png" />
+    <Content Include="Content\Styles\bootstrap.css" />
+    <Content Include="Content\Styles\bootstrap.min.css" />
+    <Content Include="Content\Styles\font-awesome\font-awesome.css" />
+    <Content Include="Content\Styles\font-awesome\font-awesome.min.css" />
+    <Content Include="Content\Styles\plugins\bootstrap-timepicker.min.css" />
+    <Content Include="Content\Styles\plugins\bootstrap-wysihtml5.css" />
+    <Content Include="Content\Styles\plugins\carousel.css" />
+    <Content Include="Content\Styles\plugins\colorbox.css" />
+    <Content Include="Content\Styles\plugins\dataTables.bootstrap.css" />
+    <Content Include="Content\Styles\plugins\datepicker.css" />
+    <Content Include="Content\Styles\plugins\daterangepicker-bs3.css" />
+    <Content Include="Content\Styles\plugins\datetimepicker.css" />
+    <Content Include="Content\Styles\plugins\jquery.toastmessage-min.css" />
+    <Content Include="Content\Styles\plugins\multi-select.css" />
+    <Content Include="Content\Styles\plugins\plugins.css" />
+    <Content Include="Content\Styles\plugins\select2.css" />
+    <Content Include="Content\Styles\plugins\slideshow.css" />
+    <Content Include="Content\Styles\plugins\toastr.min.css" />
+    <Content Include="Content\Styles\plugins\valo-elements.css" />
+    <Content Include="Content\Styles\plugins\wysiwyg-color.css" />
+    <Content Include="Content\Styles\Site.css" />
+    <Content Include="Content\Styles\spinner.css" />
+    <Content Include="Content\Styles\themes\bigshop\stylesheet.css" />
+    <Content Include="Content\Styles\themes\default.css" />
+    <Content Include="Content\Styles\themes\simple-line-icons.min.css" />
+    <Content Include="Content\Styles\themes\style-conquer.css" />
+    <Content Include="Content\Styles\themes\style-responsive.css" />
+    <Content Include="Content\Styles\themes\style.css" />
+    <Content Include="Content\Styles\themes\uniform.default.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\additional-methods.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datetimepicker.js" />
+    <Content Include="Scripts\bootstrap-hover-dropdown.min.js" />
+    <Content Include="Scripts\bootstrap-wysihtml5.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Areas\Admin\Views\web.config" />
+    <Content Include="Areas\Admin\Views\Admin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\Simple-Line-Icons.eot" />
+    <Content Include="fonts\Simple-Line-Icons.ttf" />
+    <Content Include="fonts\Simple-Line-Icons.woff" />
+    <Content Include="App_Data\Sites.json" />
+    <Content Include="Areas\Admin\Views\Category\Overrides.cshtml" />
+    <Content Include="Areas\Admin\Views\FAQ\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\FAQ\List.cshtml" />
+    <Content Include="Areas\Admin\Views\FAQ\Questions.cshtml" />
+    <Content Include="NLog.config" />
+    <Content Include="Areas\Admin\Views\Promotion\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\FAQ\EditQuestion.cshtml" />
+    <Content Include="Areas\Admin\Views\DynamicContent\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DynamicContent\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DynamicContent\Preview.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_PreviewLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\DynamicContent\PageContent.cshtml" />
+    <Content Include="Areas\Admin\Views\DynamicContent\EndUserView.cshtml" />
+    <None Include="App_Data\Environment.json" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\datatable.js" />
+    <Content Include="Scripts\dataTables.bootstrap.js" />
+    <Content Include="Scripts\daterangepicker.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Scripts\jquery-1.11.0.min.js" />
+    <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\jquery-migrate-1.2.1.min.js" />
+    <Content Include="Scripts\jquery-ui-1.10.3.custom.min.js" />
+    <Content Include="Scripts\jquery.blockui.min.js" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <Content Include="Scripts\jquery.slimscroll.min.js" />
+    <Content Include="Scripts\jquery.uniform.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\modules\commonutils.js" />
+    <Content Include="Scripts\modules\controls.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\plugins\app.js" />
+    <Content Include="Scripts\plugins\cloud_zoom.js" />
+    <Content Include="Scripts\plugins\jquery.colorbox-min.js" />
+    <Content Include="Scripts\plugins\jquery.dcjqaccordion.js" />
+    <Content Include="Scripts\plugins\jquery.easing-1.3.min.js" />
+    <Content Include="Scripts\plugins\jquery.jcarousel.min.js" />
+    <Content Include="Scripts\plugins\jquery.multi-select.js" />
+    <Content Include="Scripts\plugins\jquery.nivo.slider.pack.js" />
+    <Content Include="Scripts\plugins\simpleCart.js" />
+    <Content Include="Scripts\plugins\table-editable - Copy.js" />
+    <Content Include="Scripts\plugins\table-editable.js" />
+    <Content Include="Scripts\plugins\tabs.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\themes\bigshop\custom.js" />
+    <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\ui-toastr.js" />
+    <Content Include="Scripts\modules\form-validation.js" />
+    <Content Include="Scripts\wysihtml5-0.3.0.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Categories.cshtml" />
+    <Content Include="Areas\Admin\Views\Category\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Sites\List.cshtml" />
+    <Content Include="Views\Shared\Categories.cshtml" />
+    <Content Include="Scripts\toastr.min.js.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\Admin\Views\Categories\" />
+    <Folder Include="Models\" />
+    <Folder Include="Views\Categories\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CTrade.Client.Core\CTrade.Client.Core.csproj">
+      <Project>{6ce69368-0b20-44aa-9d24-e90062ed1891}</Project>
+      <Name>CTrade.Client.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CTrade.Client.DataAccess\CTrade.Client.DataAccess.csproj">
+      <Project>{4e16ccb4-3fd5-4422-a921-6aac7679903a}</Project>
+      <Name>CTrade.Client.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CTrade.Client.Services\CTrade.Client.Services.csproj">
+      <Project>{b3a99fc3-707a-4203-ab7f-bd9b1f3979eb}</Project>
+      <Name>CTrade.Client.Services</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50828</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:50828/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,66 @@
+﻿
+@{
+    ViewBag.Title = "View dynamic pages for a site";
+}
+@section PageScripts{
+    <script>
+        (function ($, utils) {
+            $(document).ready(function () {
+                var initialVal = getSelectedSite();
+                refresh(initialVal);
+                $('#ddlSites').change(function () {
+                    refresh($(this).val());
+                });
+            });
+
+            function processResult(data, status, xhr) {
+                if (status === 'success') {
+                    var html = '';
+                    if (data.length > 0) {
+                        $('#partialPlaceHolder')
+                            .html('<div class="table-responsive"><table class="table"><thead><tr><th>Title</th><th></th><th></th></tr></thead><tbody id="pageContents"></tbody></table></div>');
+                        for (var i = 0; i < data.length; i++)
+                            $('#pageContents').append(getItemHtml(data[i]));
+                    }
+                    else
+                        $('#partialPlaceHolder').html('<div class="alert alert-info">There are no pages for the site.</div>');
+                    $('#partialPlaceHolder').show();
+                }
+                else
+                    utils.showErrors([status]);
+            }
+
+            function getItemHtml(item) {
+                return '<tr><td>'.concat(item.Title,
+                    '</td><td><a href="',
+                    item.EditUrl,
+                    '">Edit</a></td><td><a href="',
+                    item.PreviewUrl,
+                    '">Preview</a></td></tr>');
+            }
+
+            function getSelectedSite() {
+                return $('#ddlSites').val();
+            }
+
+            function refresh(selectedItem) {
+                $.cookie("SiteId", getSelectedSite());
+                $.get('@(Url.Action("GetAll", "DynamicContent"))', { siteId: selectedItem }, processResult)
+                    .fail(function (data) {
+                        utils.showErrors(['Server error: Could not retrieve pages for the site from server']);
+                    });
+            }
+        })(jQuery, commonUtils);
+    </script>
+    }
+<div class="portlet">
+    <div class="portlet-title">
+        <a href="@Url.Action("Edit", "DynamicContent")" id="create" class="elements"><i></i>Create</a>
+    </div>
+    <div class="portlet-body">
+        <h3>View dynamic pages for a site</h3>
+        <div class="alert alert-danger display-hide validationSummary"></div>
+        @{Html.RenderAction("List", "Sites");}
+        <div id="partialPlaceHolder" style="display:none;"> </div>
+    </div>
+</div>

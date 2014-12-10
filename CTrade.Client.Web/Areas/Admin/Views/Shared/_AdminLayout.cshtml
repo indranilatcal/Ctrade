@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link href="http:/fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    @System.Web.Optimization.Styles.Render(
+    "~/admin/Content/Styles/font/css",
+    "~/admin/Content/Styles/base/css",
+    "~/admin/Content/Styles/theme/css",
+    "~/admin/Content/Styles/plugins/css")
+    @System.Web.Optimization.Scripts.Render("~/admin/bundles/jquery")
+    @System.Web.Optimization.Scripts.Render("~/admin/bundles/custommodules")
+
+</head>
+<body class="page-header-fixed page-boxed">
+    <div id="spinner" class="spinner" style="display:none;">
+        <img id="img-spinner" src="~/Content/Images/input-spinner.gif" alt="Processing ..." />
+    </div>
+    <div class="header navbar  navbar-fixed-top">
+        <div class="header-inner container">
+            <div class="page-logo">
+                <a href="default.aspx">
+                    <img src="~/content/images/ctLogo.jpg" alt="logo" />
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="page-container">
+            <div class="page-sidebar-wrapper">
+                <div class="page-sidebar navbar-collapse collapse">
+                    <!-- BEGIN SIDEBAR MENU -->
+                    <ul class="page-sidebar-menu">
+                        <li class="start ">
+
+                            <a href="@Url.Action("index", "home")"><i class="icon-home"></i><span class="title">Home</span></a>
+                        </li>
+                        <li class="active">
+                            <a href="#">
+                                <i class="icon-docs"></i>
+                                <span class="title">Admin Pages</span>
+                            </a>
+                            <ul class="sub-menu">
+                                <li>
+                                    <a href="@Url.Action("Index", "FAQ", new { area = "Admin" })" class="elements"><i></i>Frequently Asked Questions</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Category", new { area = "Admin" })" class="elements"><i></i>Categories</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Promotion", new { area = "Admin" })" class="elements"><i></i>Promotional messages</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "DynamicContent", new { area = "Admin" })" class="elements"><i></i>Dynamic pages</a>
+                                </li>
+                            </ul>
+                        </li>
+                        @if (Request.IsAuthenticated)
+                        {
+                            <li class="">
+                                <a href="javascript:;">
+                                    <i class="icon-user"></i>
+                                    <span class="title">My Account</span>
+                                    <span class="arrow "></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <li>
+                                        @Html.ActionLink("Change Password", "ChangePassword", "Account")
+                                    </li>
+                                    <li>
+                                        @Html.ActionLink("Logout", "LogOut", "Account")
+
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <h3 class="page-title">
+                        @ViewBag.Title
+                    </h3>
+                    <div class="page-bar">
+                        <ul class="page-breadcrumb">
+                            @if (ViewContext.RouteData.Values["controller"].ToString() == "Home")
+                            {
+                                <li>
+                                    <i class="fa fa-home"></i>
+                                    Home
+                                </li>
+                            }
+                            else
+                            {
+                                @Html.ActionLink("Home", "Index", "Home")
+                                <li>
+                                    <i class="fa fa-angle-right"></i>
+                                    @ViewBag.Title
+                                </li>
+
+                            }
+                        </ul>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @RenderBody()
+                            @* end col-md-12*@
+                        </div>
+                        @*  end row*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                2014 &copy; Countertrade Products
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        (function ($) {
+            $(document).ajaxSend(function () {
+                $('#spinner').show();
+            }).ajaxStop(function () {
+                $('#spinner').hide();
+            }).ajaxError(function () {
+                $('#spinner').hide();
+            });
+            $(document).ready(function () {
+                App.init();
+                // TableEditable.init();
+                // UIToastr.init();
+            });
+        })(jQuery);
+    </script>
+    @RenderSection("PageScripts", required: false)
+</body>
+</html>

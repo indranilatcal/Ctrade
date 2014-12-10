@@ -1,0 +1,170 @@
+﻿@{
+    ViewBag.Title = "Promotions";
+}
+<script>
+    (function ($, fv, utils, ctl) {
+        var dateRangePicker;
+        var promotionEditor;
+
+        $(document).ready(function () {
+            initializeFormValidaionRules();
+            promotionEditor = new ctl.Editor('#promotionText');
+            dateRangePicker = new ctl.DateRange('#dateRange');
+            initializeDiaplayNow(dateRangePicker);
+            var initialSite = $('#ddlSites').val();
+            refresh(initialSite);
+            $('#ddlSites').change(function () {
+                var item = $(this).val();
+                refresh(item);
+            });
+            $('#submitPromotion').submit(function (event) {
+                event.preventDefault();
+                if ($(this).valid()) {
+                    var promotion = getPromotion();
+                    utils.clearErrors();
+                    $.post(
+                        '@(Url.Action("Update", "Promotion"))', promotion, processResult)
+                        .fail(function (data) {
+                            utils.showErrors([data.statusText]);
+                        });
+                }
+            });
+        });
+
+        function initializeFormValidaionRules() {
+            //Need a way to supply dependency
+            $.validator.addMethod('greaterThan', function (value, element) {
+                var startDate = new Date(dateRangePicker.startDate().year(),
+                    dateRangePicker.startDate().month(), dateRangePicker.startDate().date());
+                var endDate = new Date(dateRangePicker.endDate().year(),
+                    dateRangePicker.endDate().month(), dateRangePicker.endDate().date());
+                return endDate > startDate;
+            }, 'End date must be greater than start date.');
+
+            fv.enableValidaion(
+                '#submitPromotion',
+                {
+                    promotionText: 'required',
+                    dateRangePickerInput: {
+                        greaterThan: !getDisplayNow()
+                    }
+                });
+        }
+
+        function refresh(selectedSite) {
+            $('#siteId').val(selectedSite);
+            $.get(
+                '@Url.Action("Get", "Promotion")', { siteId: selectedSite }, processResult)
+                .fail(function (data) {
+                    utils.showErrors([data.statusText]);
+                });
+        }
+
+        function processResult(data, status, xhr) {
+            if (status === 'success')
+                setPromotion(data);
+            else
+                utils.showErrors([status]);
+        }
+
+        function initializeDiaplayNow(drp) {
+            $('#activate').change(function () {
+                drp.disable(getDisplayNow());
+                drp.clear();
+            })
+        }
+
+        function setPromotion(data) {
+            if (data.HasError)
+                utils.showErrors([data.Error]);
+            else
+                utils.clearErrors();
+            if (data.PromotionText)
+                promotionEditor.setValue(data.PromotionText);
+            else
+                promotionEditor.clear();
+
+            setDisplayNow(data.Activate);
+            if (data.StartDate && data.EndDate)
+                dateRangePicker.setDates(data.StartDate, data.EndDate);
+            else
+                dateRangePicker.clear();
+        }
+
+        function getPromotion() {
+            var promotion = {};
+
+            promotion.SiteId = $('#siteId').val();
+            promotion.PromotionText = promotionEditor.val();
+
+            promotion.Activate = getDisplayNow();
+            if (!promotion.Activate) {
+                var picker = $('#dateRange').data('daterangepicker');
+                promotion.StartDate = dateRangePicker.startDate().format();
+                promotion.EndDate = dateRangePicker.endDate().format();
+            }
+
+            return promotion;
+        }
+
+        function setDisplayNow(setNow) {
+            $('#activate').prop('checked', setNow).change();
+        }
+
+        function getDisplayNow() {
+            return $('#activate').prop('checked');
+        }
+    })(jQuery, formValidation, commonUtils, controls);
+</script>
+<div class="portlet">
+    <div class="portlet-title">
+    </div>
+    <div class="portlet-body">
+        <h2>Create or edit a promotion message</h2>
+        <div class="alert alert-danger display-hide validationSummary">Fix errors!</div>
+        @{Html.RenderAction("List", "Sites");}
+        <form id="submitPromotion" class="form-horizontal" role="form">
+            <div class="form-body">
+                <input type="hidden" name="siteId" id="siteId" />
+                <div id="promotionDiv" class="form-group">
+                    <div class="col-md-12">
+                        <textarea data-error-container="#editor_error" name="promotionText" class="wysihtml5 form-control"
+                                  id="promotionText" rows="6" placeholder="Enter text ..."></textarea>
+                        <div id="editor_error">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Display until removed</label>
+                    <div class="col-md-9">
+                        <div id="divDisplayNow" class="checkbox-list">
+                            <label class="checkbox-inline">
+                                <input type="checkbox" id="activate">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3">Date Range</label>
+                    <div class="col-md-4">
+                        <div class="input-group" id="dateRange">
+                            <input data-error-container="#daterange_error" type="text" class="form-control" id="dateRangePickerInput" name="dateRangePickerInput">
+                            <div id="daterange_error">
+                            </div>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default date-range-toggle" type="button"><i class="fa fa-calendar"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn btn-info"><i class="fa fa-check"></i>Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

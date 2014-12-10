@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewBag.Title = "View frequently asked questions";
+}
+
+<script>
+    (function ($, utils) {
+        $(document).ready(function () {
+            var initialVal = $('#ddlSites').val();
+            refresh(initialVal);
+            $('#ddlSites').change(function () {
+                refresh($(this).val());
+            });
+        });
+
+        function processResult(data, status, xhr) {
+            if (status === 'success') {
+                var html = '';
+                if (data.length > 0) {
+                    $('#partialPlaceHolder').html('<div class="bs-example"><div class="list-group" id="questions"></div></div>');
+                    for (var i = 0; i < data.length; i++)
+                        $('#questions').append(getItemHtml(data[i]));
+                    $('#questions a:nth-child(even)').addClass('active');
+                }
+                else
+                    $('#partialPlaceHolder').html('<div class="alert alert-info">There are no FAQs for the site.</div>');
+                $('#partialPlaceHolder').show();
+            }
+            else
+                utils.showErrors([status]);
+        }
+
+        function getItemHtml(item) {
+            return '<a href="/Admin/FAQ/EditQuestion/'.concat(item.Id,
+                '" class="list-group-item"><h4 class="list-group-item-heading">',
+                item.QuestionText,
+                '</h4><p class="list-group-item-text">',
+                item.AnswerText,
+                '</p></a>');
+        }
+
+        function refresh(selectedItem) {
+            $('#siteId').val(selectedItem);
+            $.get('@(Url.Action("ListQuestions", "FAQ"))', { siteId: selectedItem }, processResult)
+            .fail(function (data) {
+                utils.showErrors(['Server error: Could not retrieve faqs for the site from server']);
+            });
+        }
+    })(jQuery, commonUtils);
+</script>
+<div class="portlet">
+    <div class="portlet-title">
+        <a href="@Url.Action("Index", "FAQ")" class="elements"><i></i>Manage</a>
+    </div>
+    <div class="portlet-body">
+        <h3>View frequently asked questions for a site</h3>
+        <div class="alert alert-danger display-hide validationSummary"></div>
+        @{Html.RenderAction("List", "Sites");}
+        <div id="partialPlaceHolder" style="display:none;"> </div>
+    </div>
+</div>

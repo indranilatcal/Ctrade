@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Categories and subcategories";
+}
+<script>
+    (function ($, utils) {
+        $(document).ready(function () {
+            refresh($('#ddlSites').val());
+            $('#ddlSites').change(function () {
+                var item = $(this).val();
+                refresh(item);
+            });
+        });
+        function refresh(selectedItem) {
+            $.get('@(Url.Action("Categories", "Category"))', { siteId: selectedItem }, function (data) {
+                $('#partialPlaceHolderCategories').html(data);
+                $('#partialPlaceHolderCategories').show();
+            }).fail(function (data) {
+                utils.showErrors([data.statusText]);
+            });
+            $.get('@(Url.Action("Overrides", "Category"))', { siteId: selectedItem }, function (data) {
+                $('#partialPlaceHolderOverrides').html(data);
+                $('#partialPlaceHolderOverrides').show();
+            }).fail(function (data) {
+                utils.showErrors([data.statusText]);
+            });
+        }
+    })(jQuery, commonUtils);
+</script>
+<div class="portlet">
+    <div class="portlet-title">
+    </div>
+    <div class="portlet-body">
+        <h2><small>Manage categories &amp; subcategories</small></h2>
+        <div class="alert alert-danger display-hide validationSummary"></div>
+        <div class="form-group">
+            @{Html.RenderAction("List", "Sites");}
+        </div>
+        <div id="partialPlaceHolderCategories" style="display:none"> </div>
+        <hr />
+        <h2><small>Override labels</small></h2>
+        <div id="partialPlaceHolderOverrides" style="display:none"> </div>
+    </div>
+</div>

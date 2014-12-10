@@ -1,0 +1,63 @@
+﻿@using CTrade.Client.Web.Areas.Admin.Models
+@model ManageOverridesViewModel
+
+@if (Model.Categories.Any())
+{
+    using (Html.BeginForm("UpdateOverrides", "Category", FormMethod.Post, new { @class = "form-horizontal", @role = "form" }))
+    {
+        <div class="form-body">
+            @Html.HiddenFor(m => m.SiteId, new { id = "siteId" })
+            <table id="tblOverrides" class="table table-condensed">
+                <thead>
+                    <tr class="alert-info">
+                        <th>Label</th>
+                        <th>Override</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.Categories.Count; i++)
+                    {
+                        <tr class="success">
+                            <td>
+                                @Html.HiddenFor(m => m.Categories[i].Id)
+                                @Html.DisplayFor(m => m.Categories[i].Label)
+                            </td>
+                            <td>
+                                @Html.TextBoxFor(m => m.Categories[i].OverridenLabel, new { @class = "form-control" })
+                            </td>
+                        </tr>
+
+                        if (Model.Categories[i].SubCategories.Any())
+                        {
+                            for (var j = 0; j < Model.Categories[i].SubCategories.Count; j++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.HiddenFor(m => m.Categories[i].SubCategories[j].Id)
+                                        @Html.DisplayFor(m => m.Categories[i].SubCategories[j].Label)
+                                    </td>
+                                    <td>
+                                        @Html.TextBoxFor(m => m.Categories[i].SubCategories[j].OverridenLabel, new { @class = "form-control" })
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="form-actions">
+            <div class="row">
+                <div class="col-md-9">
+                    <button type="submit" class="btn btn-info"><i class="fa fa-check"></i>Save</button>
+                </div>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="alert alert-info">
+        There are no categories associated with the site.
+    </div>
+}

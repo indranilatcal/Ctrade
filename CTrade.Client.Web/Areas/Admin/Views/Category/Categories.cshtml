@@ -1,0 +1,72 @@
+﻿@using CTrade.Client.Web.Areas.Admin.Models
+@model ManageCategoriesViewModel
+
+@if (Model.Categories.Any())
+{
+    <script>
+        (function ($) {
+            $(document).ready(function () {
+                var subCategories = [];
+                $('#optCategories option:selected').each(function () {
+                    subCategories.push($(this).val());
+                });
+                $('#optCategories').multiSelect(
+                    {
+                        selectableOptgroup: true,
+                        afterSelect: function (values) {
+                            for (var i = 0; i < values.length; i++)
+                                if (subCategories.indexOf(values[i] === -1))
+                                    subCategories.push(values[i]);
+                        },
+                        afterDeselect: function (values) {
+                            for (var i = 0; i < values.length; i++) {
+                                var index = subCategories.indexOf(values[i]);
+                                if (index !== -1)
+                                    subCategories.splice(index, 1);
+                            }
+                        }
+                    });
+                $('#submitSubCategories').submit(function (event) {
+                    event.preventDefault();
+                    $.post(
+                        '@(Url.Action("Update", "Category"))',
+                        {
+                            siteId: $('#siteId').val(),
+                            subCategories: subCategories
+                        }, function (data, status, xhr) {
+                            window.location.href = data;
+                        });
+                });
+            });
+        })(jQuery);
+</script>
+    <form id="submitSubCategories" class="form-horizontal" role="form">
+        <div class="form-body">
+            @Html.HiddenFor(m => m.SiteId, new { id = "siteId" })
+            <select class="multi-select" id="optCategories" multiple="multiple" name="optCategories[]">
+                @foreach (var c in Model.Categories)
+                {
+                    <optgroup label="@c.Label">
+                        @foreach (var s in c.SubCategories)
+                        {
+                            <option value="@s.Id" @( s.Included ? "selected" : "")>@s.Label</option>
+                        }
+                    </optgroup>
+                }
+            </select>
+        </div>
+        <div class="form-actions">
+            <div class="row">
+                <div class="col-md-9">
+                    <button type="submit" class="btn btn-info"><i class="fa fa-check"></i>Save</button>
+                </div>
+            </div>
+        </div>
+</form>
+}
+else
+{
+    <div class="alert alert-info">
+        There are no categories in the system.
+    </div>
+}

@@ -1,0 +1,11 @@
+﻿@model IEnumerable<KeyValuePair<string, string>>
+
+<div class="form-group">
+    <label for="ddlSites">Select a Site:</label>
+    <select class="dropdown" id="ddlSites" name="ddlSites">
+        @foreach (var site in Model)
+        {
+            <option value="@site.Value">@site.Key</option>
+        }
+    </select>
+</div>

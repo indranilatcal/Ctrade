@@ -1,0 +1,89 @@
+﻿@using CTrade.Client.Web.Areas.Admin.Models
+@model string
+
+@{
+    ViewBag.Title = "Edit an FAQ";
+}
+@section PageScripts {
+<script>
+    (function ($, formValidation, utils) {
+
+        function setFaq(data) {
+            $('#questionId').val(data.Id);
+            $('#questionText').text(data.QuestionText);
+            $('#answerText').text(data.AnswerText);
+        }
+
+        function getFaq(data) {
+            return {
+                Id: $('#questionId').val(),
+                QuestionText: $('#questionText').val(),
+                AnswerText: $('#answerText').val()
+            };
+        }
+
+        function processResult(data, status, xhr) {
+            if (status === 'success')
+                setFaq(data);
+            else
+                utils.showErrors([status]);
+        }
+
+        $(document).ready(function () {
+            formValidation.enableValidaion(
+                '#faqForm',
+                {
+                    questionText: 'required',
+                    answerText: 'required'
+                });
+            $.get(
+                '@Url.Action("GetQuestion", "FAQ")', { questionId: '@Model' }, processResult)
+                .fail(function (data) {
+                    utils.showErrors([data.statusText]);
+                });
+            $('#faqForm').submit(function (event) {
+                event.preventDefault();
+                if ($(this).valid()) {
+                    utils.clearErrors();
+                    var faq = getFaq();
+                    $.post(
+                        '@(Url.Action("UpdateQuestion", "FAQ"))', faq, processResult, 'json')
+                        .fail(function (data) {
+                            utils.showErrors([data.statusText]);
+                        });
+                }
+            });
+        });
+    })(jQuery, formValidation, commonUtils);
+</script>    
+    }
+<div class="portlet">
+    <div class="portlet-title">
+        <a href="@Url.Action("List", "FAQ")" class="elements"><i></i>View</a>
+    </div>
+    <div class="portlet-body">
+        <h2>Edit an FAQ and its answer</h2>
+        <div class="alert alert-danger display-hide validationSummary">Fix errors!</div>
+        <form id="faqForm" class="form-horizontal" role="form" method="post">
+            <input id="questionId" name="questionId" type="hidden" />
+            <div class="form-body">
+                <div class="form-group">
+                    <label for="questionText">Question:</label>
+                    <textarea required name="questionText" id="questionText" class="form-control" placeholder="Enter question text ..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="answerText">Answer:</label>
+                    <textarea required name="answerText" id="answerText" class="form-control" placeholder="Enter answer text ..."></textarea>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn btn-info"><i class="fa fa-check"></i>Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

@@ -1,0 +1,132 @@
+﻿@using CTrade.Client.Web.Areas.Admin.Models
+
+@{
+    ViewBag.Title = "Create or edit content for a dynamic page";
+}
+@section PageScripts {
+    <script>
+    (function ($, fv, utils, ctl) {
+        var contentEditor;
+        $(document).ready(function () {
+            initializeFormValidaionRules();
+            contentEditor = new ctl.Editor('#dynamicContent');
+            setSite('@ViewBag.SiteId');
+            setPageId('@ViewBag.PageId');
+
+            if (getPageId()) {
+                $.get(
+                    '@(Url.Action("Get", "DynamicContent"))',
+                    { siteId: getSite(), pageId: getPageId() }, processResult)
+                    .fail(function (data) {
+                        utils.showError(data.statusText);
+                    });
+            }
+
+            $('#submitContent').submit(function (event) {
+                event.preventDefault();
+                if ($(this).valid()) {
+                    utils.clearErrors();
+                    $.post(
+                        '@(Url.Action("Edit", "DynamicContent"))', getPageContent(), processResult)
+                        .fail(function (data) {
+                            utils.showError(data.statusText);
+                        });
+                }
+            });
+        });
+
+        function initializeFormValidaionRules() {
+            fv.enableValidaion(
+            '#submitContent',
+            {
+                pageTitle: 'required',
+                dynamicContent: 'required'
+            });
+        }
+
+        function processResult(data, status, xhr) {
+            if (status === 'success')
+                setPageContent(data);
+            else
+                utils.showError(status);
+        }
+
+        function setPageContent(data) {
+            if (data && !data.IsEmpty) {
+                if (data.HasError)
+                    utils.showError(data.Error);
+                else
+                    utils.clearErrors();
+                setPageId(data.Id);
+                setSite(data.SiteId);
+                $('#pageTitle').val(data.Title);
+                contentEditor.setValue(data.Content);
+            }
+            else
+                utils.showError('Could not find the page requested');
+        }
+
+        function getSite() {
+            return $('#siteId').val();
+        }
+
+        function setSite(site) {
+            $('#siteId').val(site);
+        }
+
+        function getPageId() {
+            return $('#pageId').val();
+        }
+
+        function setPageId(pageId) {
+            $('#pageId').val(pageId);
+        }
+
+        function getPageContent() {
+            var pageContent = {};
+
+            pageContent.SiteId = getSite();
+            pageContent.PageId = getPageId();
+            pageContent.Title = $('#pageTitle').val();
+            pageContent.Content = contentEditor.val();
+
+            return pageContent;
+        }
+    })(jQuery, formValidation, commonUtils, controls);
+</script>
+    }
+<div class="portlet">
+    <div class="portlet-title">
+        <a href="@Url.Action("Index", "DynamicContent")" class="elements"><i></i>Pages</a>
+    </div>
+    <div class="portlet-body">
+        <h3>@(!string.IsNullOrWhiteSpace(ViewBag.PageId as string) ? "Edit" : "Create") content for a dynamic page</h3>
+        <div class="alert alert-danger display-hide validationSummary">Fix errors!</div>
+        <form id="submitContent" class="form-horizontal" role="form">
+            <div class="form-body">
+                <input type="hidden" name="SiteId" id="siteId" />
+                <input type="hidden" name="PageId" id="pageId" />
+                <div class="form-group">
+                    <label class="col-md-3 control-label" for="pageTitle">Page Title:</label>
+                    <input type="text" required name="pageTitle" id="pageTitle" class="form-control" placeholder="Enter page title ..." />
+                </div>
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <textarea data-error-container="#editor_error" name="dynamicContent" class="wysihtml5 form-control"
+                                  id="dynamicContent" rows="6" placeholder="Enter content ..."></textarea>
+                        <div id="editor_error">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <button type="submit" class="btn btn-info"><i class="fa fa-check"></i>Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
