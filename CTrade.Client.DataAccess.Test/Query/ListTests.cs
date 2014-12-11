@@ -79,13 +79,13 @@ namespace CTrade.Client.DataAccess.Test.Query
             var queryRequest = QueryRequestFactory.CreateListQuery(
                 ClientTestData.Views.ArtistDesignDoc,
                 ClientTestData.Views.TransformToHtmlList,
-                ClientTestData.Views.ArtistsNameAsKeyAndDocAsValue);
+                ClientTestData.Views.ArtistsNameAsKeyAndDocAsValue)
+                .Configure(q => q.ContentType(HttpContentTypes.Html));
 
             var queryResp = Repository.QueryAsync(queryRequest).Result;
 
             queryResp.HasNoError();
             Assert.IsTrue(queryResp.IsHtml);
-            Assert.IsTrue(!string.IsNullOrWhiteSpace(queryResp.Etag));
             Assert.AreEqual(HttpStatusCode.OK, queryResp.HttpHeaderInfo.StatusCode);
         }
 
