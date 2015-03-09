@@ -109,6 +109,10 @@
     <Compile Include="TestRuntime.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\Environment.json">
+      <Link>Environment.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Categories\Data.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -116,9 +120,6 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Environment.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

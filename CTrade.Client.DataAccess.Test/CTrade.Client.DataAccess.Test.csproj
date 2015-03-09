@@ -99,9 +99,10 @@
     <Compile Include="TestRuntime.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Environment.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <Content Include="..\Environment.json">
+      <Link>Environment.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

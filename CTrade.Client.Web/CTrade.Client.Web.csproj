@@ -689,7 +689,10 @@
     <Content Include="Areas\Admin\Views\Shared\_PreviewLayout.cshtml" />
     <Content Include="Areas\Admin\Views\DynamicContent\PageContent.cshtml" />
     <Content Include="Areas\Admin\Views\DynamicContent\EndUserView.cshtml" />
-    <None Include="App_Data\Environment.json" />
+    <Content Include="..\Environment.json">
+      <Link>App_Data\Environment.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\datatable.js" />
     <Content Include="Scripts\dataTables.bootstrap.js" />
